@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2020 at 10:53 AM
+-- Generation Time: Mar 31, 2020 at 01:35 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -30,10 +30,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `anggota` (
   `kd_anggota` int(10) NOT NULL,
-  `nama_anggota` varchar(30) NOT NULL,
+  `nm_anggota` varchar(30) NOT NULL,
   `alamat` varchar(30) NOT NULL,
-  `tlpon` varchar(30) NOT NULL
+  `tlpn` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `anggota`
+--
+
+INSERT INTO `anggota` (`kd_anggota`, `nm_anggota`, `alamat`, `tlpn`) VALUES
+(1, 'Scarvie', 'St. Louise G4/90', '0831555631');
 
 -- --------------------------------------------------------
 
@@ -49,6 +56,13 @@ CREATE TABLE `buku` (
   `tarif` int(11) NOT NULL,
   `durasi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `buku`
+--
+
+INSERT INTO `buku` (`kd_buku`, `nm_buku`, `pengarang`, `penerbit`, `tarif`, `durasi`) VALUES
+(1, 'Noctum', 'Wei', 'Noura', 5000, 1);
 
 -- --------------------------------------------------------
 
@@ -84,31 +98,17 @@ CREATE TABLE `petugas` (
   `kd_petugas` int(10) NOT NULL,
   `nm_petugas` varchar(30) NOT NULL,
   `jabatan` varchar(30) NOT NULL,
-  `tlpn_petugas` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `registration`
---
-
-CREATE TABLE `registration` (
-  `id` int(100) NOT NULL,
-  `firstName` varchar(100) NOT NULL,
-  `lastName` varchar(100) NOT NULL,
-  `gender` varchar(100) NOT NULL,
+  `tlpn_petugas` varchar(30) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `number` int(100) NOT NULL
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `registration`
+-- Dumping data for table `petugas`
 --
 
-INSERT INTO `registration` (`id`, `firstName`, `lastName`, `gender`, `email`, `password`, `number`) VALUES
-(1, 'Wulling', 'Wei', 'Male', 'wei@gmail.com', '$2b$10$/48elac7CgMPiIPyjUim2uwll0If3pHQNQzsAQJByhWXYkeCLfEMe', 990099);
+INSERT INTO `petugas` (`kd_petugas`, `nm_petugas`, `jabatan`, `tlpn_petugas`, `email`, `password`) VALUES
+(1, 'Scarvie', 'St. Louise G4/90', '0831555631', 'scraive@gmail.com', '$2b$10$65S7G5BEv5lC67j6OdvHR.7Vq9baDtRlvaQRoLlW6jmeIOhi5e84e');
 
 --
 -- Indexes for dumped tables
@@ -148,38 +148,26 @@ ALTER TABLE `petugas`
   ADD PRIMARY KEY (`kd_petugas`);
 
 --
--- Indexes for table `registration`
---
-ALTER TABLE `registration`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `registration`
+-- AUTO_INCREMENT for table `anggota`
 --
-ALTER TABLE `registration`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `anggota`
+  MODIFY `kd_anggota` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `buku`
 --
+ALTER TABLE `buku`
+  MODIFY `kd_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for table `id_pinjam`
+-- AUTO_INCREMENT for table `petugas`
 --
-ALTER TABLE `id_pinjam`
-  ADD CONSTRAINT `id_pinjam_ibfk_1` FOREIGN KEY (`kd_buku`) REFERENCES `buku` (`kd_buku`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_pinjam_ibfk_2` FOREIGN KEY (`no_pinjam`) REFERENCES `peminjam` (`no_pinjam`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Constraints for table `peminjam`
---
-ALTER TABLE `peminjam`
-  ADD CONSTRAINT `peminjam_ibfk_1` FOREIGN KEY (`kd_anggota`) REFERENCES `anggota` (`kd_anggota`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `peminjam_ibfk_2` FOREIGN KEY (`kd_petugas`) REFERENCES `petugas` (`kd_petugas`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `petugas`
+  MODIFY `kd_petugas` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
